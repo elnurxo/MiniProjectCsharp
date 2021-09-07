@@ -1,0 +1,13 @@
+C:\Users\LENOVO\Desktop\CsharpMiniProjectElnurKhalil\CsharpMiniProjectElnurKhalil\bin\Debug\netcoreapp3.1\CsharpMiniProjectElnurKhalil.exe
+C:\Users\LENOVO\Desktop\CsharpMiniProjectElnurKhalil\CsharpMiniProjectElnurKhalil\bin\Debug\netcoreapp3.1\CsharpMiniProjectElnurKhalil.deps.json
+C:\Users\LENOVO\Desktop\CsharpMiniProjectElnurKhalil\CsharpMiniProjectElnurKhalil\bin\Debug\netcoreapp3.1\CsharpMiniProjectElnurKhalil.runtimeconfig.json
+C:\Users\LENOVO\Desktop\CsharpMiniProjectElnurKhalil\CsharpMiniProjectElnurKhalil\bin\Debug\netcoreapp3.1\CsharpMiniProjectElnurKhalil.runtimeconfig.dev.json
+C:\Users\LENOVO\Desktop\CsharpMiniProjectElnurKhalil\CsharpMiniProjectElnurKhalil\bin\Debug\netcoreapp3.1\CsharpMiniProjectElnurKhalil.dll
+C:\Users\LENOVO\Desktop\CsharpMiniProjectElnurKhalil\CsharpMiniProjectElnurKhalil\bin\Debug\netcoreapp3.1\CsharpMiniProjectElnurKhalil.pdb
+C:\Users\LENOVO\Desktop\CsharpMiniProjectElnurKhalil\CsharpMiniProjectElnurKhalil\obj\Debug\netcoreapp3.1\CsharpMiniProjectElnurKhalil.csproj.AssemblyReference.cache
+C:\Users\LENOVO\Desktop\CsharpMiniProjectElnurKhalil\CsharpMiniProjectElnurKhalil\obj\Debug\netcoreapp3.1\CsharpMiniProjectElnurKhalil.AssemblyInfoInputs.cache
+C:\Users\LENOVO\Desktop\CsharpMiniProjectElnurKhalil\CsharpMiniProjectElnurKhalil\obj\Debug\netcoreapp3.1\CsharpMiniProjectElnurKhalil.AssemblyInfo.cs
+C:\Users\LENOVO\Desktop\CsharpMiniProjectElnurKhalil\CsharpMiniProjectElnurKhalil\obj\Debug\netcoreapp3.1\CsharpMiniProjectElnurKhalil.csproj.CoreCompileInputs.cache
+C:\Users\LENOVO\Desktop\CsharpMiniProjectElnurKhalil\CsharpMiniProjectElnurKhalil\obj\Debug\netcoreapp3.1\CsharpMiniProjectElnurKhalil.dll
+C:\Users\LENOVO\Desktop\CsharpMiniProjectElnurKhalil\CsharpMiniProjectElnurKhalil\obj\Debug\netcoreapp3.1\CsharpMiniProjectElnurKhalil.pdb
+C:\Users\LENOVO\Desktop\CsharpMiniProjectElnurKhalil\CsharpMiniProjectElnurKhalil\obj\Debug\netcoreapp3.1\CsharpMiniProjectElnurKhalil.genruntimeconfig.cache
