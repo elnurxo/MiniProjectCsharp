@@ -122,7 +122,7 @@ namespace CsharpMiniProjectElnurKhalil.Services
                 }
                 else
                 {
-                    Console.WriteLine("You have exceeded the Salary Limit!");
+                    Console.WriteLine("You have exceeded the Salary Limit!");                   
                     return;
                 }
             }

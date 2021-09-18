@@ -38,9 +38,15 @@ namespace CsharpMiniProjectElnurKhalil
             Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
             #endregion
             Console.Write("Enter the Operation that you want to Perform : ");
-            int enter = Convert.ToInt32(Console.ReadLine());
+            string enter = Console.ReadLine();
+            int ienter;
+            while (!int.TryParse(enter, out ienter))
+            {
+                Console.Write("Enter the Operation that you want to Perform :");
+                enter = Console.ReadLine();
+            }           
             Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - -");
-            switch (enter)
+            switch (ienter)
             {
                 #region CASE 1
                 case 1:
@@ -70,10 +76,8 @@ namespace CsharpMiniProjectElnurKhalil
 
                     foreach (var item in programcs.ListDepartment())
                     {
-                        if (item.Name == dprtname)
+                        if (item.Name.ToUpper() == dprtname.ToUpper())
                         {
-
-
                             for (int i = 0; i < item.Employees.Length; i++)
                             {
                                 foreach (var item1 in item.Employees)
@@ -88,10 +92,9 @@ namespace CsharpMiniProjectElnurKhalil
                                         i++;
                                     }
                                 }
-
-
                             }
                         }
+
                     }
                     goto tryagain;
                 #endregion
@@ -137,7 +140,7 @@ namespace CsharpMiniProjectElnurKhalil
                 goto tryagain1;
             }
         ChoiseWorkerLimit:
-            Console.WriteLine("Enter Worker Limit of Department:");
+            Console.Write("Enter Worker Limit of Department:");
             int workerlimit;
             bool number = int.TryParse(Console.ReadLine(), out workerlimit);
             if (!number)
@@ -159,14 +162,14 @@ namespace CsharpMiniProjectElnurKhalil
                     "Please Enter Proper Value!");
                 goto ChoiseSalaryLimit;
             }
-            if (salarylimit > 250 && workerlimit >= 1)
+            if (salarylimit > workerlimit * 250 && workerlimit >= 1)
             {
                 programcs.AddDepartment(name, workerlimit, salarylimit);
                 Console.WriteLine($"* * * * * * * * * * * * * * * * * * *\nDepartament Name:{name} \nWorker Limit of Department:{workerlimit} \nSalary Limit of Department: {salarylimit}\n* * * * * * * * * * * * * * * * * * *");
             }
             else
             {
-                Console.WriteLine("Minimum Salary should be 250AZN \nMinimum Worker Limit shhould be at least 1!\n");
+                Console.WriteLine("Minimum Salary should be 250AZN per Worker \nMinimum Worker Limit shhould be at least 1!\n");
                 Console.WriteLine("Please Try Again:");
                 goto tryagainsalarylimit;
             }
@@ -239,7 +242,21 @@ namespace CsharpMiniProjectElnurKhalil
             {
                 Console.WriteLine($"{j + 1} - {programcs.Departments[j].Name}");
             }
-            int dprtInt = int.Parse(Console.ReadLine());
+            tryagain2:
+            Console.Write("Enter the Department number that you want to Add New Worker: ");
+            string dprtStr = Console.ReadLine();
+            int dprtInt;
+            while (!int.TryParse(dprtStr, out dprtInt))
+            {
+                Console.Write("Enter the Department number that you want to Add New Worker:");
+                dprtStr = Console.ReadLine();
+            }
+            if (dprtInt>programcs.Departments.Length)
+            {
+                Console.WriteLine("There's no such Depaertment, Please Try Again!");
+                goto tryagain2;
+
+            }
             string[] positiontype = Enum.GetNames(typeof(Enums));
             for (int i = 0; i < positiontype.Length; i++)
             {
