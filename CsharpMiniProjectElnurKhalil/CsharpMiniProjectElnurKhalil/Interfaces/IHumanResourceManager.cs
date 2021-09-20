@@ -17,7 +17,7 @@ namespace CsharpMiniProjectElnurKhalil.Interfaces
         //METHOD TO MAKE CHANGE ON DEPARTMENTS
         public void EditDepartment(string oldname, string newname);
         // METHOD TO ADD NEW EMPLOYEE
-        public void AddEmployee(string fullname, Enums position, int salary, int departmentindex);
+        public void AddEmployee(string fullname, Enums position, double salary, Department department);
         //METHOD TO REMOVE EXISTING EMPLOYEE
         public void RemoveEmployee(string depname, string workerno, string workername);
         //METHOD TO MAKE CHANGE ON EXISTING EMPLOYEE

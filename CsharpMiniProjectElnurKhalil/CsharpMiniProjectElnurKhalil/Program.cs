@@ -7,10 +7,11 @@ namespace CsharpMiniProjectElnurKhalil
 {
     class Program
     {
+        private static int salary;
         static void Main(string[] args)
         {
             HumanManagerService programcs = new HumanManagerService();
-        #region Menu Console WriteLine
+            #region Menu Console WriteLine
             #region Design
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine(@"                ▄█     █▄     ▄████████  ▄█        ▄████████  ▄██████▄    ▄▄▄▄███▄▄▄▄      ▄████████ 
@@ -44,7 +45,7 @@ namespace CsharpMiniProjectElnurKhalil
             {
                 Console.Write("Enter the Operation that you want to Perform :");
                 enter = Console.ReadLine();
-            }           
+            }
             Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - -");
             switch (ienter)
             {
@@ -78,23 +79,18 @@ namespace CsharpMiniProjectElnurKhalil
                     {
                         if (item.Name.ToUpper() == dprtname.ToUpper())
                         {
-                            for (int i = 0; i < item.Employees.Length; i++)
+
+                            foreach (var item1 in item.Employees)
                             {
-                                foreach (var item1 in item.Employees)
+
+                                if (item1 != null)
                                 {
-                                    if (item1.FullName != null)
-                                    {
-                                        Console.WriteLine($"Full Name: {item1.FullName} \nNo: {item1.No} \nDepartment: {item1.DepartmentName} \nPosition: {item1.Position} \nSalary: {item1.Salary}");
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        i++;
-                                    }
+                                    Console.WriteLine($"Full Name: {item1.FullName} \nNo: {item1.No} \nDepartment: {item1.DepartmentName} \nPosition: {item1.Position} \nSalary: {item1.Salary}");
+                                    Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
                                 }
                             }
                         }
-
+                        
                     }
                     goto tryagain;
                 #endregion
@@ -116,7 +112,7 @@ namespace CsharpMiniProjectElnurKhalil
                 #region CASE 9
                 case 9:
                     Console.WriteLine("Successfully Logged Out from the System!");
-                    Console.WriteLine(DateTime.Now);                  
+                    Console.WriteLine(DateTime.Now);
                     return;
                 #endregion
                 #region DEFAULT CASE
@@ -131,15 +127,16 @@ namespace CsharpMiniProjectElnurKhalil
         //METHOD TO CREATE NEW DEPARTMENT
         static void AddDepartment(ref HumanManagerService programcs)
         {
-            tryagain1:
+        tryagain1:
             Console.Write("Enter the Name of Department:");
             string name = Console.ReadLine();
-            if (name.Length<=1)
+            if (name.Length <= 1)
             {
                 Console.WriteLine("Department Name cannot be less than 2 letters. Please Try Again!");
                 goto tryagain1;
             }
         ChoiseWorkerLimit:
+        tryagainsalarylimit:
             Console.Write("Enter Worker Limit of Department:");
             int workerlimit;
             bool number = int.TryParse(Console.ReadLine(), out workerlimit);
@@ -150,7 +147,6 @@ namespace CsharpMiniProjectElnurKhalil
                     "Please Enter Integer Value!");
                 goto ChoiseWorkerLimit;
             }
-        tryagainsalarylimit:
         ChoiseSalaryLimit:
             Console.Write("Enter Salary Limit of Department:");
             double salarylimit;
@@ -181,56 +177,33 @@ namespace CsharpMiniProjectElnurKhalil
         tryagain1:
             Console.Write("Enter the Name of Department that you want to make changes about :");
             string oldname = Console.ReadLine();
+            Console.Write("Enter new name of Department:");
+            string newname = Console.ReadLine();
 
             foreach (var item in programcs.Departments)
             {
                 if (oldname == item.Name)
                 {
                     Console.WriteLine("Department is found!");
-
-                    Console.Write("Enter new name of Department:");
-                    string newname = Console.ReadLine();
-                    foreach (var item1 in programcs.Departments)
+                    programcs.EditDepartment(oldname, newname);
+                    foreach (var item2 in item.Employees)
                     {
-                        if (newname == item1.Name)
-                        {
-                            Console.WriteLine("There is a department with the name you entered!");
-
-                            goto tryagain1;
-                        }
-
+                        item2.No = item2.No.Replace(item2.No.Substring(0, 2), newname.ToUpper().Substring(0, 2));
+                        item2.DepartmentName = newname;                        
                     }
-                    if (item.Name == newname)
-                    {
-                        Console.WriteLine("The new name you enter is the same as the existing department name!");
-                        goto tryagain1;
-                    }
-                    else
-                    {
-                        programcs.EditDepartment(oldname, newname);
-                        foreach (var item1 in programcs.Departments)
-                        {
-                            foreach (var item2 in item1.Employees)
-                            {
-                                item2.No = item2.No.Replace(item2.No.Substring(0, 2), newname.ToUpper().Substring(0, 2));
-                                item2.DepartmentName = newname;
-                            }
-                        }
-                        Console.WriteLine("The Operation Was Performed Successfully!");
-                        break;
-
-                    }
-
                 }
-                else
+                else if (newname == oldname)
                 {
-                    Console.WriteLine("There is no such Department!");
+                    Console.WriteLine("There is a department with the name you entered!");
+
                     goto tryagain1;
                 }
-
+                else if (newname == item.Name)
+                {
+                    Console.WriteLine("The new name you enter is the same as the existing department name!");
+                    goto tryagain1;
+                }
             }
-
-
         }
         //METHOD TO CREATE NEW EMPLOYEE
         static void AddEmployee(ref HumanManagerService programcs)
@@ -242,7 +215,7 @@ namespace CsharpMiniProjectElnurKhalil
             {
                 Console.WriteLine($"{j + 1} - {programcs.Departments[j].Name}");
             }
-            tryagain2:
+        tryagain2:
             Console.Write("Enter the Department number that you want to Add New Worker: ");
             string dprtStr = Console.ReadLine();
             int dprtInt;
@@ -251,7 +224,7 @@ namespace CsharpMiniProjectElnurKhalil
                 Console.Write("Enter the Department number that you want to Add New Worker:");
                 dprtStr = Console.ReadLine();
             }
-            if (dprtInt>programcs.Departments.Length)
+            if (dprtInt > programcs.Departments.Length)
             {
                 Console.WriteLine("There's no such Depaertment, Please Try Again!");
                 goto tryagain2;
@@ -277,26 +250,34 @@ namespace CsharpMiniProjectElnurKhalil
 
         tryagain:
             Console.Write("Salary : ");
-            int salary = Convert.ToInt32(Console.ReadLine());
-            if (salary <= 250)
-            {
-                Console.WriteLine("Minimum Salary should be 250AZN");
-                goto tryagain;
-            }
+            double salary = Convert.ToDouble(Console.ReadLine());
 
-            programcs.AddEmployee(fullname, enums, salary, (dprtInt - 1));
+            foreach (var item in programcs.Departments)
+            {
+                foreach (var item2 in item.Employees)
+                {
+                    if (salary <= 250)
+                    {
+
+                        Console.WriteLine("Minimum Salary should be 250AZN");
+                        goto tryagain;
+
+                    }
+
+                }
+            }
+            programcs.AddEmployee(fullname, enums, salary, programcs.Departments[dprtInt - 1]);
         }
         //METHOD TO MAKE CHANGE ON EXISTING EMPLOYEE
         static void EditEmployee(ref HumanManagerService programcs)
         {
             Console.WriteLine("Enter NO of Worker: ");
-
             string no = Console.ReadLine();
             foreach (var item in programcs.Departments)
             {
                 foreach (var item1 in item.Employees)
                 {
-                    if (no == item1.No)
+                    if (no.ToUpper() == item1.No.ToUpper())
                     {
                         Console.WriteLine("Worker is Found!");
                         Console.WriteLine($"Full Name: {item1.FullName} \nPosition: {item1.Position} \nSalary: {item1.Salary} \n* * * * * * * * * * * * * * * * * * *");
@@ -320,12 +301,28 @@ namespace CsharpMiniProjectElnurKhalil
                         }
                         Enums enums = (Enums)typeint;
                         item1.Position = enums;
-                        Console.WriteLine("Done!");
+                        Console.WriteLine("Position Changed!");
 
                         Console.Write("Enter new Salary:");
                         double newsalary = int.Parse(Console.ReadLine());
-                        item1.Salary = newsalary;
+                        foreach (var item3 in programcs.Departments)
+                        {
+                            foreach (var item4 in item.Employees)
+                            {
+                                if (salary >= 250 && salary<item.SalaryLimit)
+                                {
+                                    item1.Salary = newsalary;
+                                    break;
 
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Salary is out of Range!");
+                                    return;
+                                }
+
+                            }
+                        }
                         return;
                     }
                 }
@@ -344,6 +341,7 @@ namespace CsharpMiniProjectElnurKhalil
                     if (item1 != null)
                     {
                         Console.WriteLine($"NO: {item1.No} \nFull Name: {item1.FullName} \nPosition: {item1.Position} \nSalary: {item1.Salary}");
+                        Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
 
                     }
                 }

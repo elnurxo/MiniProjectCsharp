@@ -15,7 +15,8 @@ namespace CsharpMiniProjectElnurKhalil.Models
         public double Salary;
         public string DepartmentName;
 
-        public Employee(string fullname, Enums position, int salary, Department departmentname)
+        //CONSTRUCTOR TO SET NEEDED VALUES BEFORE CREATING OBJECT
+        public Employee(string fullname, Enums position, double salary, Department departmentname)
         {
             _no++;
             FullName = fullname;

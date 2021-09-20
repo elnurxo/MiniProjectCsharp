@@ -12,6 +12,7 @@ namespace CsharpMiniProjectElnurKhalil.Models
         public double SalaryLimit;
         public Employee[] Employees;
 
+        //CONSTRUCTOR TO SET NEEDED VALUES
         public Department(string name, int workerlimit, double salarylimit)
         {
             Name = name;

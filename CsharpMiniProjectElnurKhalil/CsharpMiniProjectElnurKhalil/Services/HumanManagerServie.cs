@@ -38,11 +38,12 @@ namespace CsharpMiniProjectElnurKhalil.Services
         {
             foreach (Department item in Departments)
             {
-                //if (item.Name == oldname)
-                //{
-                item.Name = newName;
-                Console.WriteLine("The Change is Saved!");
-                return;
+                if (oldname==item.Name)
+                {
+                    item.Name = newName;
+                    Console.WriteLine("The Change is Saved!");
+                    return;
+                }
             }
         }
         //METHOD TO MAKE CHANGE ON EXISTING WORKER
@@ -99,6 +100,23 @@ namespace CsharpMiniProjectElnurKhalil.Services
                         int index = Array.IndexOf(department.Employees, employee);
                         Array.Clear(department.Employees, index, 1);
                         Console.WriteLine("Worker successfully Removed!");
+                        for (int i = 0; i < department.Employees.Length; i++)
+                        {
+                            if (department.Employees[i]!=null)
+                            {
+                                continue;
+                            }
+                            for (int j = 0; j < department.Employees.Length; j++)
+                            {
+                                if (department.Employees[i]==null)
+                                {
+                                    continue;
+                                    department.Employees[i] = department.Employees[j];
+                                    department.Employees[j] = null;
+                                    break;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -108,17 +126,16 @@ namespace CsharpMiniProjectElnurKhalil.Services
             }
         }
         //METHOD TO CREATE NEW WORKER
-        public void AddEmployee(string fullname, Enums position, int salary, int departmentindex)
+        public void AddEmployee(string fullname, Enums position, double salary, Department department)
         {
-            Department department = _departments[departmentindex];
             if (department.WorkerLimit > department.Employees.Length)
             {
-                if (department.SalaryLimit > salary)
+                if (department.SalaryLimit > CalcSalarySum() + salary)
                 {
                     Employee employee = new Employee(fullname, position, salary, department);
                     department.AddEmployye(employee);
                     Console.WriteLine("Worker is Created!");
-                    return;
+                    
                 }
                 else
                 {
@@ -155,6 +172,22 @@ namespace CsharpMiniProjectElnurKhalil.Services
         //METHOD TO MAKE CHANGE ON EXISTING EMPLOYEE
         public void EditEmployee(string no, double salary, Enums position)
         {
+        }
+        //METHOD TO CALCULATE ALL SALARY TO KNOW IF IT EXCEEDED SALARY LIMIT
+        public double CalcSalarySum()
+        {
+            double sum = 0;
+            foreach (var item in _departments)
+            {
+                foreach (var item2 in item.Employees)
+                {
+                    if (item2 != null)
+                    {
+                        sum = sum + item2.Salary;
+                    }
+                }
+            }
+            return sum;
         }
     }
 }
