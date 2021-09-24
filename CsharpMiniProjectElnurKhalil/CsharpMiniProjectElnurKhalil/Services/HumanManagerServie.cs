@@ -11,6 +11,7 @@ namespace CsharpMiniProjectElnurKhalil.Services
     {
         private Department[] _departments;
         public Department[] Departments => _departments;
+        //CONSTRUCTOR OF SERVICE TO CREATE DERARTMENTS ARRAY
         public HumanManagerService()
         {
             _departments = new Department[0];

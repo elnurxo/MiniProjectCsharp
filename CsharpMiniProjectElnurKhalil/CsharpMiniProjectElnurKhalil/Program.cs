@@ -7,7 +7,6 @@ namespace CsharpMiniProjectElnurKhalil
 {
     class Program
     {
-        private static int salary;
         static void Main(string[] args)
         {
             HumanManagerService programcs = new HumanManagerService();
@@ -71,27 +70,7 @@ namespace CsharpMiniProjectElnurKhalil
                 #endregion
                 #region CASE 5
                 case 5:
-                    programcs.ListDepartment();
-                    Console.Write("Enter Department Name: ");
-                    string dprtname = Console.ReadLine();
-
-                    foreach (var item in programcs.ListDepartment())
-                    {
-                        if (item.Name.ToUpper() == dprtname.ToUpper())
-                        {
-
-                            foreach (var item1 in item.Employees)
-                            {
-
-                                if (item1 != null)
-                                {
-                                    Console.WriteLine($"Full Name: {item1.FullName} \nNo: {item1.No} \nDepartment: {item1.DepartmentName} \nPosition: {item1.Position} \nSalary: {item1.Salary}");
-                                    Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
-                                }
-                            }
-                        }
-                        
-                    }
+                    ShowEmployeesDepartment(ref programcs);
                     goto tryagain;
                 #endregion
                 #region CASE 6
@@ -269,9 +248,10 @@ namespace CsharpMiniProjectElnurKhalil
             programcs.AddEmployee(fullname, enums, salary, programcs.Departments[dprtInt - 1]);
         }
         //METHOD TO MAKE CHANGE ON EXISTING EMPLOYEE
+        private static int salary;
         static void EditEmployee(ref HumanManagerService programcs)
         {
-            Console.WriteLine("Enter NO of Worker: ");
+        Console.WriteLine("Enter NO of Worker: ");
             string no = Console.ReadLine();
             foreach (var item in programcs.Departments)
             {
@@ -359,6 +339,31 @@ namespace CsharpMiniProjectElnurKhalil
             string workerno = Console.ReadLine();
             programcs.RemoveEmployee(depname, workerno, workername);
 
+        }
+        //METHOD TO SHOW EMPLOYEES OF SELECTED DEPARTMENT
+        static void ShowEmployeesDepartment(ref HumanManagerService programcs)
+        {
+            programcs.ListDepartment();
+            Console.Write("Enter Department Name: ");
+            string dprtname = Console.ReadLine();
+
+            foreach (var item in programcs.ListDepartment())
+            {
+                if (item.Name.ToUpper() == dprtname.ToUpper())
+                {
+
+                    foreach (var item1 in item.Employees)
+                    {
+
+                        if (item1 != null)
+                        {
+                            Console.WriteLine($"Full Name: {item1.FullName} \nNo: {item1.No} \nDepartment: {item1.DepartmentName} \nPosition: {item1.Position} \nSalary: {item1.Salary}");
+                            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+                        }
+                    }
+                }
+
+            }
         }
     }
 }
